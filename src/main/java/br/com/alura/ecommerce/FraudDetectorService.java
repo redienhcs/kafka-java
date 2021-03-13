@@ -8,9 +8,11 @@ public class FraudDetectorService {
 
         var fraudDetectorService = new FraudDetectorService();
 
-        var service = new KafkaService( FraudDetectorService.class.getSimpleName() , "ECOMMERCE_NEW_ORDER",
-                fraudDetectorService::parse );
-        service.run();
+        try ( var service = new KafkaService( FraudDetectorService.class.getSimpleName() , "ECOMMERCE_NEW_ORDER",
+                fraudDetectorService::parse );) {
+            service.run();
+        }
+
 
 
     }
